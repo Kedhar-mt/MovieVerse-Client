@@ -1,0 +1,58 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Add hover effect for movie cards */
+  .movie-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Ensure all cards are the same height */
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .card-body {
+    flex-grow: 1;
+  }
+  
+  
+  
+  /* Sticky navbar at the top */
+  .navbar.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Make sure navbar stays on top */
+  }
+  
+  /* Bold line under active category */
+  .navbar-nav .nav-link.active-category {
+    border-bottom: 3px solid #007bff; /* Add a blue line */
+    font-weight: bold; /* Make the text bold */
+  }
+  
+  /* Optional: Adjust modal overlay (if needed) */
+  .overlay-class {
+    z-index: 9998; /* Ensure overlay is behind the modal */
+  }
+  /* Ensure the images fit within their container */
+  /* Ensure the images fit within their container without zooming */
+  .cast-image {
+    height: 300px; /* Adjust height as per your requirement */
+    object-fit: contain; /* Ensures the entire image fits within the container */
+    width: 100%;
+    border-radius: 8px; /* Optional: Adds rounded corners to the images */
+  }
+  
+  
+  
+  
