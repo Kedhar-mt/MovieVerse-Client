@@ -66,7 +66,7 @@ const MovieList = () => {
     <div className="container mt-4">
       <div className="row no-gutters">
         {movies.map((movie) => (
-          <div key={movie.id} className="col-4 col-sm-3 col-md-2 col-lg-2 mb-4">
+          <div key={movie.id} className="col-6 col-sm-6 col-md-4 col-lg-2 mb-4">
             <div className="card movie-card" onClick={() => handleCardClick(movie)}>
               <div className="card-img-wrapper">
                 <img
