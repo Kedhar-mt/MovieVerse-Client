@@ -8,7 +8,7 @@ const MVLogoAnimation = ({ onAnimationEnd }) => {
     const timeout = setTimeout(() => {
       setIsAnimating(false);
       if (onAnimationEnd) onAnimationEnd();
-    }, 4000); // Duration of the animation
+    }, 2000); // Duration of the animation
     return () => clearTimeout(timeout);
   }, [onAnimationEnd]);
 
