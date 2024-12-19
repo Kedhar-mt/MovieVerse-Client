@@ -34,4 +34,11 @@
     height: 100%;
     object-fit: cover;
   }
+@media (max-width: 576px) {
+  .movie-card {
+      width: 90%;  /* Increase width of the card */
+      margin: 0 auto; /* Center the card */
+  }
+}
+  
   
