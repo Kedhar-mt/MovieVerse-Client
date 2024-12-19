@@ -35,7 +35,7 @@ const CastSlider = ({ movieId }) => {
 
   // Slider settings
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 6, // Show 6 actors at a time
@@ -60,8 +60,8 @@ const CastSlider = ({ movieId }) => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
         },
       },
     ],
