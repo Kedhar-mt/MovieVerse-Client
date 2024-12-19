@@ -1,13 +1,10 @@
 // CastSlider.jsx
 import { useState, useEffect, useCallback } from 'react';
+import Slider from 'react-slick';
 import '../styles/CastSlider.css';
 
 const CastSlider = ({ movieId }) => {
   const [movieCastDetailsList, setMovieCastDetailsList] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(
-    window.innerWidth <= 767 ? 2 : 5
-  );
 
   const getMovieCastDetailsData = useCallback(async () => {
     const API_KEY = '6f9ea63bae2c6135bb5c3379d58618de';
@@ -34,57 +31,48 @@ const CastSlider = ({ movieId }) => {
 
   useEffect(() => {
     getMovieCastDetailsData();
-    const handleResize = () => {
-      setItemsPerPage(window.innerWidth <= 767 ? 2 : 5);
-    };
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
   }, [getMovieCastDetailsData]);
 
-  const handleNext = () => {
-    if (currentIndex + itemsPerPage < movieCastDetailsList.length) {
-      setCurrentIndex((prevIndex) => prevIndex + itemsPerPage);
-    }
+  // Slider settings
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 6, // Show 6 actors at a time
+    slidesToScroll: 6, // Scroll 6 actors at a time
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
-
-  const handlePrevious = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prevIndex) => prevIndex - itemsPerPage);
-    }
-  };
-
-  const visibleCast = movieCastDetailsList.slice(
-    currentIndex,
-    currentIndex + itemsPerPage
-  );
 
   return (
     <div className="movie-cast">
       <h1 className="cast-heading">Top Billed Cast</h1>
-      <div className="carousel-controls">
-        <button
-          type="button"
-          className="carousel-button previous-button"
-          onClick={handlePrevious}
-          disabled={currentIndex === 0}
-        >
-          Previous
-        </button>
-        <button
-          type="button"
-          className="carousel-button next-button"
-          onClick={handleNext}
-          disabled={currentIndex + itemsPerPage >= movieCastDetailsList.length}
-        >
-          Next
-        </button>
-      </div>
-      <ul className="movie-cast-cards">
-        {visibleCast.map((cast) => (
-          <li key={cast.id} className="cast-item">
+      <Slider {...settings}>
+        {movieCastDetailsList.map((cast) => (
+          <div key={cast.id} className="cast-item">
             <img
               src={`https://image.tmdb.org/t/p/w200${cast.profilePath}`}
               alt={cast.originalName}
@@ -94,10 +82,34 @@ const CastSlider = ({ movieId }) => {
               <h2 className="cast-name">{cast.originalName}</h2>
               <p className="cast-character">Character: {cast.character}</p>
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </Slider>
     </div>
+  );
+};
+
+// Custom Next Arrow
+const SampleNextArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} custom-arrow next-arrow`}
+      style={{ ...style, display: 'block', background: 'green' }}
+      onClick={onClick}
+    />
+  );
+};
+
+// Custom Previous Arrow
+const SamplePrevArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} custom-arrow prev-arrow`}
+      style={{ ...style, display: 'block', background: 'green' }}
+      onClick={onClick}
+    />
   );
 };
 
